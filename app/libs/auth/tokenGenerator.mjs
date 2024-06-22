@@ -1,4 +1,4 @@
-import { config } from "../../config.mjs";
+import { config } from "../../../config.mjs";
 import paseto from "paseto";
 const {
   V4: { sign },

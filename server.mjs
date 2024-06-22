@@ -3,12 +3,28 @@ import Fastify from "fastify";
 
 //plugins
 import { redisPlugin } from "./app/plugins/redis.mjs";
-import { mongodbPlugin } from "./app/plugins/mongodb.mjs";
+import mongodbPlugin from "./app/plugins/mongodb.mjs";
 import { nanoidPlugin } from "./app/plugins/nanoid.mjs";
 import { authPlugin } from "./app/plugins/auth.mjs";
-import { bullPlugin } from "./app/plugins/bull.mjs";
+import bullPlugin from "./app/plugins/bull.mjs";
+import { kavenegarPlugin } from "./app/plugins/kavenegar.mjs";
+
+//routes
+import apiAuthByEmail from "./app/routes/auth/authUserByEmail.mjs";
+import apiRegistration from "./app/routes/registration/authUserByEmail.mjs";
+import apiToolsCaptcha from "./app/routes/tools/captcha.mjs";
+import apiEmailVerification from "./app/routes/tools/emailVerification.mjs";
+import apiUserProfile from "./app/routes/auth/authProfile.mjs";
+// import apiUser from "./app/routes/user/user.mjs";
 
 const fastify = Fastify({ logger: true });
+
+fastify.register(apiAuthByEmail);
+fastify.register(apiRegistration);
+fastify.register(apiToolsCaptcha);
+fastify.register(apiEmailVerification);
+fastify.register(apiUserProfile);
+// fastify.register(apiUser);
 
 //setup swagger
 import swagger from "@fastify/swagger";
@@ -56,6 +72,7 @@ fastify.register(mongodbPlugin, {
 });
 fastify.register(bullPlugin);
 fastify.register(authPlugin);
+fastify.register(kavenegarPlugin, { apiKey: config.kavenegarApiKey });
 
 fastify.get("/", {
   schema: {
@@ -76,6 +93,25 @@ fastify.get("/", {
     return { hello: "world" };
   },
 });
+
+
+//workers
+
+fastify.get('/testbull', async (request, reply) => {
+  let job = await fastify.jobQTest.add({ test: 'test' });
+  // console.log(job);
+  return await reply.send({ "Botly Rest API": "Bull Works fine!" });
+})
+
+fastify.get('/testemail', async (request, reply) => {
+  try {
+    const job = await fastify.registrationQueue.add({ userId: '1000', email: 'manvfx@gmail.com', registrationTime: "asdasdasd" });
+    return await reply.send({ "Super Fastify Email": "Email Works fine!",jobId:job.id, data: job.data });
+  } catch (error) {
+    fastify.log.error('Failed to add job:', error);
+    reply.status(500).send({ error: 'Failed to add job' });
+  }
+})
 
 export async function start() {
   try {

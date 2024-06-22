@@ -16,22 +16,26 @@
   "author": "M.Amin Najafi",
   "license": "ISC",
   "dependencies": {
+    "@fastify/mongodb": "^8.0.0",
     "@fastify/static": "^7.0.4",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^4.0.0",
     "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
     "bull": "^4.13.1",
     "dotenv": "^16.4.5",
     "eta": "^3.4.0",
     "fastify": "^4.28.0",
     "fastify-plugin": "^4.5.1",
     "ioredis": "^5.4.1",
+    "kavenegar": "^1.1.4",
     "mongodb": "^6.7.0",
     "nanoid": "^5.0.7",
     "paseto": "^3.1.4",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "nodemon": "^3.1.4"
   }
 }
