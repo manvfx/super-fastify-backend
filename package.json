@@ -1,0 +1,35 @@
+{
+  "name": "super-fastify-backend",
+  "version": "1.0.0",
+  "description": "Rest Api for Super Fastify",
+  "main": "index.mjs",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs",
+    "pm2start": "pm2 start pm2.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "M.Amin Najafi",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^7.0.4",
+    "axios": "^1.7.2",
+    "bull": "^4.13.1",
+    "dotenv": "^16.4.5",
+    "eta": "^3.4.0",
+    "fastify": "^4.28.0",
+    "fastify-plugin": "^4.5.1",
+    "ioredis": "^5.4.1",
+    "mongodb": "^6.7.0",
+    "nanoid": "^5.0.7",
+    "paseto": "^3.1.4",
+    "svg-captcha": "^1.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
