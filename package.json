@@ -17,6 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/static": "^7.0.4",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^4.0.0",
     "axios": "^1.7.2",
     "bull": "^4.13.1",
     "dotenv": "^16.4.5",
