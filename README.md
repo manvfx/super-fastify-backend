@@ -1,6 +1,6 @@
 #### Super Fastify Backend
 
-*Rest API for Botly Project*
+*Rest API for Super Fastify Project*
 
 Documentation is located in the **`docs`** folder.
 
