@@ -8,21 +8,22 @@ module.exports = {
         },
         {
             name: "super_worker_testWorker",
-            script: "./workers/testWorker.mjs",
+            script: "./app/workers/testWorker.mjs",
             cwd: ".",
             watch: false
         },
         {
             name: "super_worker_registrationWorker",
-            script: "./workers/registrationWorker.mjs",
+            script: "./app/workers/registrationWorker.mjs",
             cwd: ".",
             watch: false
         },
         {
             name: "super_worker_emailVerificationWorker",
-            script: "./workers/emailVerification.mjs",
+            script: "./app/workers/emailVerification.mjs",
             cwd: ".",
             watch: false
         }
     ]
 }
+

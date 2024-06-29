@@ -1,11 +1,11 @@
-import { config } from "../config.mjs";
+import { config } from "../../config.mjs";
 import { default as Queue } from "bull";
 import axios from "axios";
-import * as Eta from "eta";
+import { Eta } from "eta";
 import { default as Redis } from "ioredis";
 import { nanoid } from "nanoid";
 
-Eta.configure({ views: "./templates" });
+const eta = new Eta({ views: "./templates" });
 // Redis Connection for Verification (like captcha and email verification,  etc)
 const redisVerification = new Redis(config.redis_verification_url, {
   retryStrategy: function (times) {
@@ -28,7 +28,7 @@ async function sendMail(email) {
   try {
     // configure template engine
     let code = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
-    let html = await Eta.renderFileAsync("emailVerification.html", {
+    let html = await eta.renderFileAsync("emailVerification.html", {
       code: code,
     });
     // Generated email id

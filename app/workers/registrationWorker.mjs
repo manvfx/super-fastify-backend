@@ -1,12 +1,12 @@
 import { config } from "../../config.mjs";
 import Queue from "bull";
 import axios from "axios";
-import * as Eta from "eta";
+import { Eta } from "eta";
 import { MongoClient } from "mongodb";
 
 const client = new MongoClient(config.mongoUrl);
 
-Eta.configure({ views: "./templates" });
+const eta = new Eta({ views: "./templates" });
 
 // Initiating the Queue
 const queue = new Queue("registrationQueue", config.redis_bull_url);
@@ -37,7 +37,7 @@ async function registrationUserData({ userId, email, registrationTime }) {
     console.log("Inserted documents =>", insertResult);
 
     // Send email and configure template engine
-    const html = await Eta.renderFileAsync("welcomeLetter.html", { email });
+    const html = await eta.renderFileAsync("welcomeLetter.html", { email });
 
     await axios.post(
       "https://api.sendinblue.com/v3/smtp/email",

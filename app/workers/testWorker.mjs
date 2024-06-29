@@ -1,4 +1,4 @@
-import { config } from "../config.mjs";
+import { config } from "../../config.mjs";
 import { default as Queue } from 'bull';
 
 let queue = new Queue('jobQTest', config.redis_bull_url);
